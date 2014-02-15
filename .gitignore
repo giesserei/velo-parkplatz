@@ -1,0 +1,9 @@
+/.settings/
+/build/
+/misc/
+/.classpath
+/.project
+/etc/
+
+/WebContent/WEB-INF/shiro.ini
+/WebContent/WEB-INF/classes/
