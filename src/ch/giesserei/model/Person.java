@@ -45,6 +45,8 @@ public class Person {
 	
 	public static final int LENGTH_EMAIL = 100;
 	
+	public static final int LENGTH_TELEFON = 20;
+	
 	static {
 	    ANONYM = new Person();
 	    ANONYM.setNachname("Anonym");
@@ -90,6 +92,10 @@ public class Person {
     @Column(nullable = false, length = 100)
     private String email;
     
+    @Size(min = 1, max = 20, message = "{val.telefon.max.length}")
+    @Column(length = 20)
+    private String telefon;
+    
     private int geburtsjahr;
     
     /**
@@ -133,6 +139,22 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public PersonTyp getPersonTyp() {
+        return personTyp;
+    }
+
+    public void setPersonTyp(PersonTyp personTyp) {
+        this.personTyp = personTyp;
+    }
+
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
     }
 
     public int getGeburtsjahr() {

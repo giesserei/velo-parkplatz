@@ -1,8 +1,5 @@
 package ch.giesserei.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,7 +7,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -52,9 +48,6 @@ public class Mietobjekt {
     @Column(nullable = false)
     private MietobjektTyp typ;
     
-    @OneToMany(mappedBy="mietobjekt")
-    private List<Vertrag> vertraege = new ArrayList<Vertrag>();
-    
     public long getVersion() {
         return version;
     }
@@ -85,10 +78,6 @@ public class Mietobjekt {
 
     public void setTyp(MietobjektTyp typ) {
         this.typ = typ;
-    }
-
-    public List<Vertrag> getVertraege() {
-        return vertraege;
     }
 
     public Long getId() {

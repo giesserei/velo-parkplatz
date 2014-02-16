@@ -3,6 +3,8 @@ alter table reservation_stellplatz drop column mieter_firma;
 
 -- Neue Spalte zum Speichern des Typen eines Person -> Default: Bewohner
 alter table person add column person_typ INTEGER NOT NULL DEFAULT 0;
+-- Neue Spalte mit Telefonnummer
+alter table person add column telefon VARCHAR(20);
 
 -- Längen der Spalten in der Tabelle reservation_stellplatz setzen
 alter table reservation_stellplatz alter bemerkung set data type VARCHAR(500);
@@ -32,6 +34,8 @@ CREATE TABLE RESERVATION_RAUM (
   mieter_person BIGINT, 
   RAUM_ID BIGINT NOT NULL, 
   PRIMARY KEY (ID));
+  
+alter table RESERVATION_RAUM add column telefon VARCHAR(20);
   
 ALTER TABLE RESERVATION_RAUM ADD CONSTRAINT RSRVTNRMRMD FOREIGN KEY (RAUM_ID) REFERENCES RAUM (ID);
 ALTER TABLE RESERVATION_RAUM ADD CONSTRAINT RSRVTNRMmtrprsn FOREIGN KEY (mieter_person) REFERENCES PERSON (ID);

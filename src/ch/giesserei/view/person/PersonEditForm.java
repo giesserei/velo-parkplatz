@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import ch.giesserei.model.Adresse;
 import ch.giesserei.model.Person;
+import ch.giesserei.model.PersonTyp;
 import ch.giesserei.resource.AppRes;
 import ch.giesserei.resource.ValMsg;
 import ch.giesserei.view.BaseEditForm;
@@ -15,6 +16,7 @@ import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Layout;
+import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.TextField;
 
 /**
@@ -27,11 +29,15 @@ public class PersonEditForm extends BaseEditForm {
 	
 	private final Person person;
 	
+	private NativeSelect typ;
+	
 	private TextField vorname;
 	
 	private TextField nachname;
 	
 	private TextField email;
+	
+	private TextField telefon;
 	
 	private TextField geburtsjahr;
 	
@@ -66,9 +72,11 @@ public class PersonEditForm extends BaseEditForm {
 	}
 	
 	public void fillBean() {
+	    this.person.setPersonTyp((PersonTyp) this.typ.getValue());
 		this.person.setVorname(this.vorname.getValue());
 		this.person.setNachname(this.nachname.getValue());
 		this.person.setEmail(this.email.getValue());
+		this.person.setTelefon(this.telefon.getValue());
 		if (StringUtils.isBlank(this.geburtsjahr.getValue())) {
 			this.person.setGeburtsjahr(0);
 		}
@@ -91,11 +99,21 @@ public class PersonEditForm extends BaseEditForm {
     // ---------------------------------------------------------
 	
 	private void createFields(Layout layout) {
+	    this.typ = new NativeSelect(AppRes.getString("person.lb.typ"));
+        for (PersonTyp typItem : PersonTyp.values()) {
+            this.typ.addItem(typItem);
+            this.typ.setItemCaption(typItem, AppRes.getString(typItem.getResourceKey()));
+        }
+        this.typ.setNullSelectionAllowed(false);
+        layout.addComponent(this.typ);
+	    
 		this.vorname = createTextField(layout, "person.lb.vorname", Person.LENGTH_VORNAME, "val.vorname.not.null", true);
 		this.nachname = createTextField(layout, "person.lb.nachname", Person.LENGTH_NACHNAME, "val.nachname.not.null", true);
 		
 		this.email = createTextField(layout, "person.lb.email", Person.LENGTH_EMAIL, "val.email.not.null", true);
 		this.email.addValidator(new EmailValidator(ValMsg.getString("val.email.format")));
+		
+		this.telefon = createTextField(layout, "person.lb.telefon", Person.LENGTH_TELEFON, true);
 		
 		this.geburtsjahr = createTextField(layout, "person.lb.geburtsjahr", 4, true);
 		this.geburtsjahr.addValidator(new GeburtsjahrValidator());
@@ -112,9 +130,17 @@ public class PersonEditForm extends BaseEditForm {
 		fillField(this.vorname, this.person.getVorname());
 		fillField(this.nachname, this.person.getNachname());
 		fillField(this.email, this.person.getEmail());
+		fillField(this.telefon, this.person.getTelefon());
 		fillField(this.geburtsjahr, this.person.getGeburtsjahr(), true);
 		fillField(this.strasse, this.person.getAdresse().getStrasse());
 		fillField(this.ort, this.person.getAdresse().getOrt());
 		fillField(this.plz, this.person.getAdresse().getPlz(), true);
+		
+		if (this.person.getPersonTyp() == null) {
+            this.typ.setValue(PersonTyp.BEWOHNER);
+        }
+        else {
+            this.typ.setValue(this.person.getPersonTyp());
+        }
 	}
 }
