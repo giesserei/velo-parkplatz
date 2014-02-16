@@ -114,12 +114,12 @@
                 <div class="col-md-6">
                   <div class="form-group <#if model.errorField! == "name">has-error</#if>">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Vorname und Name" 
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Vorname und Name" maxlength="100"
                            value="${model.name!}">
                   </div>
                   <div class="form-group <#if model.errorField! == "email">has-error</#if>">
                     <label for="email">E-Mail</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Deine Mail-Adresse" 
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Deine Mail-Adresse" maxlength="100"
                            value="${model.email!}">
                   </div>  
                   

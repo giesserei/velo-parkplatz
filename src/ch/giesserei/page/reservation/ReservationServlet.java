@@ -157,8 +157,6 @@ public class ReservationServlet extends HttpServlet {
         reservation.setReservationStatus(ReservationStatus.RESERVIERT);
         reservation.setAnonym(true);
         reservation.setBemerkung(Utility.cropString(bean.getBemerkung(), ReservationStellplatz.LENGTH_BEMERKUNG));
-        reservation.setName(Utility.cropString(bean.getName(), ReservationStellplatz.LENGTH_NAME));
-        reservation.setEmail(Utility.cropString(bean.getEmail(), ReservationStellplatz.LENGTH_EMAIL));
         reservation.setWohnungNr(Integer.parseInt(bean.getWohnung()));
         reservation.setStellplatz(bean.getStellplatz());
         
@@ -167,6 +165,7 @@ public class ReservationServlet extends HttpServlet {
             return true;
         }
         catch (Exception e) {
+            LOG.error("Fehler beim Speichern: ", e);
             bean.setReservationSaveError(true);
             return false;
         }

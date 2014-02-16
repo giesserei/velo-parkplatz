@@ -79,14 +79,6 @@ public class ReservationStellplatz {
     private Person mieterPerson;
     
     /**
-     * 1-n Beziehung zu einer juristischen Person -> Mieter des Stellplatzes.
-     * (Wird von der GUI bisher nicht verwendet)
-     */
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "mieter_firma")
-    private JuristischePerson mieterJuristischePerson;
-    
-    /**
      * 1-n Beziehung zu einem Stellplatz.
      */
     @NotNull(message = "{val.stellplatz.not.null}")
@@ -112,7 +104,7 @@ public class ReservationStellplatz {
     @NotNull(message = "{val.kosten.pro.monat.not.null}")
     @Min(value = 0, message = "{val.kosten.pro.monat.min}")
     @Max(value = 500, message = "{val.kosten.pro.monat.max}")
-    @Column(name="kosten_pro_monat", nullable = false)
+    @Column(name = "kosten_pro_monat", nullable = false)
     private double kostenProMonat;
     
     @Enumerated(EnumType.ORDINAL)
@@ -124,6 +116,7 @@ public class ReservationStellplatz {
     private boolean bezahlt;
     
     @Size(min = 0, max = 500, message = "{val.bemerkung.max.length}")
+    @Column(length = 500)
     private String bemerkung;
     
     /**
@@ -149,6 +142,7 @@ public class ReservationStellplatz {
      * Zusätzliche Angabe des Names bei einer anonymen Reservation.
      */
     @Size(min = 0, max = 100, message = "{val.name.max.length}")
+    @Column(length = 100)
     private String name;
     
     /**
@@ -222,14 +216,6 @@ public class ReservationStellplatz {
     
     public void setMieterPerson(Person mieterPerson) {
         this.mieterPerson = mieterPerson;
-    }
-    
-    public JuristischePerson getMieterJuristischePerson() {
-        return mieterJuristischePerson;
-    }
-    
-    public void setMieterJuristischePerson(JuristischePerson mieterJuristischePerson) {
-        this.mieterJuristischePerson = mieterJuristischePerson;
     }
 
     public double getKostenProMonat() {

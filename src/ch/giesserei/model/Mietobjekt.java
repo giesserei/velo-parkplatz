@@ -29,6 +29,8 @@ public class Mietobjekt {
 
     public static final String PROPERTY_NUMMER = "nummer";
     
+    public static final int LENGTH_BEZEICHNUNG = 50;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,8 +44,8 @@ public class Mietobjekt {
     @Column(nullable = false)
     private int nummer;
     
-    @Size(min = 0, max = 100, message = "{val.bezeichnung.max.length}")
-    @Column(length = 100)
+    @Size(min = 0, max = 50, message = "{val.bezeichnung.max.length}")
+    @Column(length = 50)
     private String bezeichnung;
     
     @Enumerated(EnumType.STRING)

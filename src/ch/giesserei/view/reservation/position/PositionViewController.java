@@ -195,9 +195,6 @@ public class PositionViewController extends AbstractViewController implements Re
         this.view.getNummerFilter().addValueChangeListener(new ValueChangeListener() {
             @Override
             public void valueChange(final ValueChangeEvent event) {
-                final String valueString = String.valueOf(event.getProperty().getValue());
-                Notification.show("Value changed:", valueString, Type.TRAY_NOTIFICATION);
-
                 selectedStellplatz = (Stellplatz) event.getProperty().getValue();
                 view.fillDetails(selectedStellplatz);
                 setAktivData();

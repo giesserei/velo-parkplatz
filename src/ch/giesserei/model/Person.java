@@ -3,6 +3,8 @@ package ch.giesserei.model;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,6 +39,12 @@ public class Person {
 	
 	public static final Person ANONYM;
 	
+	public static final int LENGTH_VORNAME = 75;
+	
+	public static final int LENGTH_NACHNAME = 75;
+	
+	public static final int LENGTH_EMAIL = 100;
+	
 	static {
 	    ANONYM = new Person();
 	    ANONYM.setNachname("Anonym");
@@ -62,19 +70,24 @@ public class Person {
      */
     private boolean updatedInLastSync;
     
+    @Enumerated(EnumType.ORDINAL)
+    @NotNull(message = "{val.person.typ.not.null}")
+    @Column(name="person_typ", nullable = false)
+    private PersonTyp personTyp; 
+    
     @NotNull(message = "{val.vorname.not.null}")
     @Size(min = 1, max = 75, message = "{val.vorname.max.length}")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 75)
     private String vorname;
     
     @NotNull(message="{val.name.not.null}")
     @Size(min = 1, max = 75, message = "{val.name.max.length}")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 75)
     private String nachname;
     
     @NotNull(message = "{val.email.not.null}")
-    @Size(min = 1, max = 75, message="{val.email.max.length}")
-    @Column(nullable = false)
+    @Size(min = 1, max = 100, message="{val.email.max.length}")
+    @Column(nullable = false, length = 100)
     private String email;
     
     private int geburtsjahr;

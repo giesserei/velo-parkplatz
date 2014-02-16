@@ -1,5 +1,6 @@
 package ch.giesserei.model;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -16,9 +17,14 @@ import org.apache.commons.lang3.StringUtils;
  */
 @Embeddable 
 public class Adresse {
+    
+    public static final int LENGTH_STRASSE = 100;
+    
+    public static final int LENGTH_ORT = 100;
 
     @NotNull(message = "{val.strasse.not.null}")
     @Size(min = 1, max = 100, message = "{val.strasse.max.length}")
+    @Column(length = 100)
     private String strasse;
     
     @NotNull(message="{val.plz.not.null}")
@@ -28,6 +34,7 @@ public class Adresse {
     
     @NotNull(message="{val.ort.not.null}")
     @Size(min = 1, max = 100, message = "{val.ort.max.length}")
+    @Column(length = 100)
     private String ort;
 
     public String getStrasse() {

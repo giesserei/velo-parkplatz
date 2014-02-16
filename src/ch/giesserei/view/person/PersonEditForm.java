@@ -2,6 +2,7 @@ package ch.giesserei.view.person;
 
 import org.apache.commons.lang3.StringUtils;
 
+import ch.giesserei.model.Adresse;
 import ch.giesserei.model.Person;
 import ch.giesserei.resource.AppRes;
 import ch.giesserei.resource.ValMsg;
@@ -90,17 +91,17 @@ public class PersonEditForm extends BaseEditForm {
     // ---------------------------------------------------------
 	
 	private void createFields(Layout layout) {
-		this.vorname = createTextField(layout, "person.lb.vorname", 75, "val.vorname.not.null", true);
-		this.nachname = createTextField(layout, "person.lb.nachname", 75, "val.nachname.not.null", true);
+		this.vorname = createTextField(layout, "person.lb.vorname", Person.LENGTH_VORNAME, "val.vorname.not.null", true);
+		this.nachname = createTextField(layout, "person.lb.nachname", Person.LENGTH_NACHNAME, "val.nachname.not.null", true);
 		
-		this.email = createTextField(layout, "person.lb.email", 75, "val.email.not.null", true);
+		this.email = createTextField(layout, "person.lb.email", Person.LENGTH_EMAIL, "val.email.not.null", true);
 		this.email.addValidator(new EmailValidator(ValMsg.getString("val.email.format")));
 		
 		this.geburtsjahr = createTextField(layout, "person.lb.geburtsjahr", 4, true);
 		this.geburtsjahr.addValidator(new GeburtsjahrValidator());
 		
-		this.strasse = createTextField(layout, "person.lb.strasse", 100, false);
-		this.ort = createTextField(layout, "person.lb.ort", 100, false);
+		this.strasse = createTextField(layout, "person.lb.strasse", Adresse.LENGTH_STRASSE, false);
+		this.ort = createTextField(layout, "person.lb.ort", Adresse.LENGTH_ORT, false);
 		
 		this.plz = createTextField(layout, "person.lb.plz", 4, true);
 		this.plz.addValidator(new PlzValidator());

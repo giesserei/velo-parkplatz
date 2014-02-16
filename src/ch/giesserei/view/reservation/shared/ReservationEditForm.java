@@ -148,13 +148,13 @@ public class ReservationEditForm extends BaseEditForm {
         this.bemerkung = new TextArea(AppRes.getString("reservation.lb.bemerkung"));
         this.bemerkung.setRows(5);
         this.bemerkung.setSizeFull();
-        this.bemerkung.setMaxLength(450);
+        this.bemerkung.setMaxLength(ReservationStellplatz.LENGTH_BEMERKUNG);
         layout.addComponent(this.bemerkung);
         
         this.bezahlt = new CheckBox(AppRes.getString("reservation.lb.bezahlt"));
         layout.addComponent(this.bezahlt);
         
-        this.nameWohnungBuchung = createTextField(layout, "reservation.lb.name.buchung", 100, false);
+        this.nameWohnungBuchung = createTextField(layout, "reservation.lb.name.buchung", ReservationStellplatz.LENGTH_NAME, false);
         this.nameWohnungBuchung.setWidth("100%");
 	}
 	

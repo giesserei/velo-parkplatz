@@ -13,6 +13,12 @@
   </error-page>
   
   <context-param>
+    <description>Vaadin production mode</description>
+    <param-name>productionMode</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  
+  <context-param>
     <param-name>PERSISTENCE_UNIT_NAME</param-name>
     <param-value>giesserei_derby</param-value>
   </context-param>
