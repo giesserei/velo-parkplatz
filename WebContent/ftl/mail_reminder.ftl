@@ -18,7 +18,7 @@ Bitte überweise den Mietpreis in Höhe von ${kosten?string.currency} innerhalb 
   8404 Winterthur
   IBAN: CH61 0900 0000 8533 4587 8
 
-Einzahlungsscheine befinden sich vor der Wohnung 2412 (auf dem Schuhschrank, Haus 1, 4. Obergeschoss).
+Einzahlungsscheine befinden sich vor der Wohnung 2412 (Haus 1, 4. Obergeschoss).
 
 
 Bitte beachte:
