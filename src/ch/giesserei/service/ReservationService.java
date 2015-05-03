@@ -142,8 +142,9 @@ public class ReservationService extends BaseService {
     
     /**
      * Liefert die Reservationen, deren Zahlung überfällig ist.
-     * Reservationsdatum war bereits vor mindestens {@link Const#TAGE_ZAHLUNGSFRIST} Tagen und 
-     * der Beginn der Miete liegt in der Vergangenheit.
+     * 
+     * 1. Der Beginn der Miete liegt in der Vergangenheit.
+     * 2. Die Reservierung ist nicht bezahlt.
      * 
      * @return siehe Beschreibung
      */
@@ -153,21 +154,17 @@ public class ReservationService extends BaseService {
                 new BeanItemContainer<ReservationStellplatz>(ReservationStellplatz.class);
         
         ReservationStatus[] status = ReservationStatus.getAktivStatus();
-        int startIndex = 2;
-        Date zahlungsfrist = Utility.addDay(new Date(), -1 * Const.TAGE_ZAHLUNGSFRIST);
-        zahlungsfrist = Utility.stripTime(zahlungsfrist);
+        int startIndex = 1;
         
         String queryStr = "SELECT r FROM ReservationStellplatz r WHERE"
-                + " r.bezahlt = false AND r.reservationDatum < ?1 AND r.beginnDatum < CURRENT_DATE"
+                + " r.bezahlt = false AND r.beginnDatum < CURRENT_DATE"
                 + " AND r.reservationStatus IN ("
                 + getParameterListString(status.length, startIndex)
                 + ")";
         
         Query q = getEntityManager().createQuery(queryStr);
         
-        q.setParameter(1, zahlungsfrist);
-        
-        for (int i = startIndex; i <= (status.length + 1); i++) {
+        for (int i = startIndex; i <= (status.length + (startIndex - 1)); i++) {
             q.setParameter(i, status[i - startIndex]);
         }
         
