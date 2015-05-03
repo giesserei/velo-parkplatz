@@ -6,8 +6,8 @@ import ch.giesserei.calendar.CalendarRenderProvider;
 import ch.giesserei.calendar.SvgCalendarRenderProvider;
 import ch.giesserei.core.Config;
 import ch.giesserei.core.Images;
-import ch.giesserei.core.LocalMailProvider;
 import ch.giesserei.core.MailProvider;
+import ch.giesserei.core.MailProviderImpl;
 import ch.giesserei.filter.JpaFilter;
 import ch.giesserei.imp.ImportMietobjekt;
 import ch.giesserei.imp.ImportReservation;
@@ -47,7 +47,7 @@ public class CoreModule extends AbstractModule {
         bind(ReservationService.class);   
         bind(Images.class);
         bind(Config.class);
-        bind(MailProvider.class).to(LocalMailProvider.class);
+        bind(MailProvider.class).to(MailProviderImpl.class);
         bind(ImportMietobjekt.class);
         bind(SyncPerson.class);
         bind(ImportReservation.class);
