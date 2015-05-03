@@ -84,11 +84,13 @@ public class ReservationService extends BaseService {
         ReservationStatus[] rolloverStatus = ReservationStatus.getRolloverStatus();
         ReservationStatus[] aktivStatus = ReservationStatus.getAktivStatus();
         
-        int startIndexStatus = 2;
+        int startIndexStatus = 3;
         // Joins zusätzlich angegeben, da der SQL-Compiler sonst mit diesem Statement nicht klar kommt
         Query q = getEntityManager().createQuery(
               " SELECT r "
             + " FROM ReservationStellplatz r JOIN Stellplatz s ON r.stellplatz.id = s.id"  
+            // 1. Enddatum der Reservation muss gleich dem maximalen Enddatum der Reservationen (reserviert, verlängert) sein, 
+            //    welche bis zum Übergabedatum abläuft
             + " WHERE r.endDatumExklusiv = ("
             + "   SELECT MAX(r1.endDatumExklusiv)"
             + "   FROM ReservationStellplatz r1 JOIN Stellplatz s1 ON r1.stellplatz.id = s1.id"
@@ -97,9 +99,11 @@ public class ReservationService extends BaseService {
             +           getParameterListString(rolloverStatus.length, startIndexStatus)
             + "     )"
             + " )"
+            // 2. Der Reservationsstatus muss (reserviert, verlängert) sein
             + " AND r.reservationStatus IN ("
             +       getParameterListString(rolloverStatus.length, startIndexStatus + rolloverStatus.length)
             + " )"
+            // 3. Es darf keine Reservation existieren, die nach dem Übergabedatum endet (reserviert, verlängert, gekündigt)
             + " AND NOT EXISTS ("
             + "   SELECT r3 "
             + "   FROM ReservationStellplatz r3 JOIN Stellplatz s3 ON r3.stellplatz.id = s3.id"
@@ -107,9 +111,17 @@ public class ReservationService extends BaseService {
             + "     AND r3.reservationStatus IN ("
             +           getParameterListString(aktivStatus.length, startIndexStatus + 2 * rolloverStatus.length)
             + "     )"
+            + " )"
+            // 4. Nach der selektierten Reservation darf es keine gekündigte Reservation geben
+            + " AND NOT EXISTS ("
+            + "   SELECT r4 "
+            + "   FROM ReservationStellplatz r4 JOIN Stellplatz s4 ON r4.stellplatz.id = s4.id"
+            + "   WHERE r4.endDatumExklusiv > r.endDatumExklusiv AND r4.stellplatz = r.stellplatz"
+            + "     AND r4.reservationStatus = ?2"
             + " )");     
         
         q.setParameter(1, datum);
+        q.setParameter(2, ReservationStatus.GEKUENDIGT);
         
         for (int i = startIndexStatus; i <= (rolloverStatus.length + (startIndexStatus - 1)); i++) {
             q.setParameter(i, rolloverStatus[i - startIndexStatus]);

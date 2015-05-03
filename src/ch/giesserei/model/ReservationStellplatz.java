@@ -82,9 +82,11 @@ public class ReservationStellplatz {
      * 1-n Beziehung zu einer juristischen Person -> Mieter des Stellplatzes.
      * (Wird von der GUI bisher nicht verwendet)
      */
+    /*
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mieter_firma")
     private JuristischePerson mieterJuristischePerson;
+    */
     
     /**
      * 1-n Beziehung zu einem Stellplatz.
@@ -224,6 +226,7 @@ public class ReservationStellplatz {
         this.mieterPerson = mieterPerson;
     }
     
+    /*
     public JuristischePerson getMieterJuristischePerson() {
         return mieterJuristischePerson;
     }
@@ -231,6 +234,7 @@ public class ReservationStellplatz {
     public void setMieterJuristischePerson(JuristischePerson mieterJuristischePerson) {
         this.mieterJuristischePerson = mieterJuristischePerson;
     }
+    */
 
     public double getKostenProMonat() {
 		return kostenProMonat;
