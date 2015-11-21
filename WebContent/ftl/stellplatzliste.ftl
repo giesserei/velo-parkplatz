@@ -29,7 +29,7 @@
               <h1>Velo-Parkplatzliste</h1>
               <p>Hier könnt ihr nachsehen, welche Velo-Parkplätze noch frei sind. Bei Fragen wendet euch bitte an:</p>
               <address>
-                <a href="mailto:kasse@giesserei-gesewo.ch">kasse@giesserei-gesewo.ch</a>
+                <a href="mailto:mobilitaet@giesserei-gesewo.ch">mobilitaet@giesserei-gesewo.ch</a>
               </address>
             </div>
           </div>

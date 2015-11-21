@@ -30,7 +30,7 @@
               <p>Hier könnt ihr einen Velo-Parkplatz reservieren. Nach der Reservation bekommt ihr automatisch ein E-Mail mit den Zahlungsinformationen. 
                  Bei Fragen wendet euch bitte an:</p>
               <address>
-                <a href="mailto:kasse@giesserei-gesewo.ch">kasse@giesserei-gesewo.ch</a>
+                <a href="mailto:mobilitaet@giesserei-gesewo.ch">mobilitaet@giesserei-gesewo.ch</a>
               </address>
             </div>
           </div>
