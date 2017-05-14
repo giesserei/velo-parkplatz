@@ -44,7 +44,7 @@
         <ul class="nav nav-pills" id="sektorenTab">
           <li class="active"><a href="#sektor1" data-toggle="pill">Sektor 1 (41-69)</a></li>
           <li><a href="#sektor2" data-toggle="pill">Sektor 2 (70-127)</a></li>
-          <li><a href="#sektor3" data-toggle="pill">Sektor 3 (Spezial 1-15)</a></li>
+          <li><a href="#sektor3" data-toggle="pill">Sektor 3 (Spezial 1, 8-15)</a></li>
           <li><a href="#sektor4" data-toggle="pill">Sektor 4 (Spezial 16-26, 128-183)</a></li>
           <li><a href="#sektor5" data-toggle="pill">Sektor 5 (Spezial 27-32, 184-244)</a></li>
           <li><a href="#sektor6" data-toggle="pill">Sektor 6 (Spezial 33-39, 245-298)</a></li>
